@@ -1,0 +1,181 @@
+:root {
+  --field: #b9cedc;
+  --fg: var(--ink);
+  --fg-soft: rgba(23, 48, 42, 0.72);
+  --line: rgba(23, 48, 42, 0.18);
+  --bubble: #fffdf8;
+}
+body.light {
+  --fg: var(--paper);
+  --fg-soft: rgba(243, 238, 227, 0.74);
+  --line: rgba(243, 238, 227, 0.22);
+}
+
+body {
+  overflow: hidden;
+  background: var(--field);
+  color: var(--fg);
+}
+
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 34px 6vw 0;
+  z-index: 2;
+}
+.wordmark { font-size: 30px; }
+.meta { font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-soft); font-variant-numeric: tabular-nums; }
+
+.stage {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 4vw;
+  padding: 110px 6vw 150px;
+}
+
+.copy { max-width: 720px; }
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  animation: rise 0.6s 0.05s ease-out both;
+}
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(48px, 8.4vmin, 120px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  animation: rise 0.7s 0.1s cubic-bezier(.2, .8, .2, 1) both;
+}
+.instruction {
+  margin: 26px 0 0;
+  max-width: 40ch;
+  min-height: 2.8em;
+  font-size: clamp(19px, 2.3vmin, 27px);
+  line-height: 1.4;
+  animation: rise 0.6s 0.2s ease-out both;
+}
+.instruction.swap { animation: swap 0.45s ease-out both; }
+.breathing .instruction { font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 4vmin, 48px); line-height: 1.2; }
+
+.count {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-top: 5vmin;
+  animation: rise 0.6s 0.3s ease-out both;
+}
+#count { font-family: var(--serif); font-weight: 500; font-size: clamp(56px, 9.5vmin, 128px); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums lining-nums; }
+#countLabel { font-size: 15px; color: var(--fg-soft); }
+
+@keyframes rise { from { transform: translateY(16px); opacity: 0; } }
+@keyframes swap { from { transform: translateY(8px); opacity: 0; } }
+
+.light .mascot { color: var(--paper); }
+.figure { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.mascot-wrap { position: relative; z-index: 1; width: min(36vmin, 380px); aspect-ratio: 1; animation: drop 0.8s 0.15s cubic-bezier(.3, 1.5, .5, 1) both; }
+@keyframes drop { from { transform: translateY(-40px) rotate(-6deg); opacity: 0; } }
+
+.bubble {
+  position: relative;
+  z-index: 2;
+  max-width: min(30vw, 360px);
+  margin-bottom: 8px;
+  padding: 14px 18px;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: var(--bubble);
+  color: var(--ink);
+  font-size: clamp(15px, 1.6vmin, 19px);
+  line-height: 1.4;
+  animation: bubble-in 0.45s 0.6s cubic-bezier(.3, 1.6, .5, 1) both;
+}
+.bubble::after {
+  content: '';
+  position: absolute;
+  left: 46%;
+  bottom: -12px;
+  width: 18px;
+  height: 18px;
+  background: var(--bubble);
+  border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  transform: rotate(45deg);
+}
+.sig { display: block; margin-top: 6px; font-size: 0.82em; text-align: right; opacity: 0.62; }
+.bubble.bump { animation: bump 0.4s ease; }
+@keyframes bubble-in { from { transform: scale(0.6); opacity: 0; } }
+@keyframes bump { 40% { transform: scale(1.04); } }
+
+.breath {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  width: min(44vmin, 470px);
+  aspect-ratio: 1;
+  margin-left: calc(min(44vmin, 470px) / -2);
+  border: 1.5px solid var(--fg);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.62);
+  transition: transform 4s cubic-bezier(.45, 0, .55, 1), opacity 0.8s;
+}
+.breathing .breath { opacity: 0.5; }
+.phase-in .breath, .phase-hold-in .breath { transform: scale(1.02); }
+
+.moods { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.moods button {
+  padding: 11px 20px;
+  border: 1.5px solid var(--fg);
+  border-radius: 999px;
+  font-size: 17px;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+.moods button:hover { transform: translateY(-2px); }
+.moods button.chosen { background: var(--fg); color: var(--field); }
+.moods.answered button:not(.chosen) { opacity: 0.4; }
+
+.bottom { position: fixed; left: 6vw; right: 6vw; bottom: 34px; z-index: 2; }
+.rule { display: flex; gap: 6px; height: 3px; }
+.rule span { flex: 1; position: relative; background: var(--line); border-radius: 2px; overflow: hidden; }
+.rule span i { position: absolute; inset: 0; width: 0; background: var(--fg); }
+.actions { display: flex; justify-content: flex-end; gap: 28px; min-height: 24px; margin-top: 18px; }
+.actions button {
+  padding: 2px 0;
+  font-size: 15px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  text-decoration-color: var(--line);
+  animation: rise 0.4s ease-out both;
+  transition: text-decoration-color 0.15s;
+}
+.actions button:hover { text-decoration-color: currentColor; }
+kbd { font: inherit; font-size: 12px; margin-left: 4px; padding: 1px 6px; border: 1px solid var(--line); border-radius: 5px; color: var(--fg-soft); }
+
+body.done .instruction, body.done .moods, body.done .actions, body.done .breath { opacity: 0; transition: opacity 0.3s; }
+body.done .title { animation: swap 0.5s ease-out both; }
+
+#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; }
+
+@media (max-width: 1000px), (max-aspect-ratio: 1/1) {
+  .stage { grid-template-columns: 1fr; grid-template-rows: auto auto; padding-top: 90px; gap: 2vh; }
+  .figure { order: -1; }
+  .mascot-wrap { width: min(28vmin, 260px); }
+  .bubble { max-width: 80vw; }
+  .copy { justify-self: center; text-align: center; }
+  .instruction { margin-inline: auto; }
+  .count, .moods { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

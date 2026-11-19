@@ -1,0 +1,73 @@
+{
+  "name": "paws",
+  "productName": "Paws",
+  "version": "1.0.0",
+  "description": "Paws: a break buddy that reminds you to rest your eyes, drink water, stretch, walk and not burn out.",
+  "main": "main.js",
+  "author": "Priyu",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "demo": "electron . --demo",
+    "icons": "node scripts/make-icons.js",
+    "dist": "npm run icons && electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "@fontsource-variable/source-serif-4": "5.3.1",
+    "@fontsource/schibsted-grotesk": "5.3.0",
+    "electron": "45.4.1",
+    "electron-builder": "26.18.0",
+    "sharp": "0.35.5"
+  },
+  "build": {
+    "appId": "com.paws.desktop",
+    "productName": "Paws",
+    "copyright": "Copyright © 2026 Priyu",
+    "compression": "maximum",
+    "electronLanguages": [
+      "en-US"
+    ],
+    "files": [
+      "main.js",
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "shortcutName": "Paws",
+      "artifactName": "Paws-Setup-${version}.exe",
+      "include": "build/installer.nsh",
+      "allowToChangeInstallationDirectory": true,
+      "installerSidebar": "build/installerSidebar.bmp",
+      "uninstallerSidebar": "build/installerSidebar.bmp",
+      "installerHeader": "build/installerHeader.bmp"
+    },
+    "asarUnpack": [
+      "**/node_modules/koffi/**",
+      "**/node_modules/@koromix/**"
+    ]
+  },
+  "dependencies": {
+    "koffi": "3.3.6"
+  }
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <title>Paws heads-up</title>
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="mascot.css" />
+  <style>
+    html, body { background: transparent; overflow: hidden; }
+    .card {
+      position: absolute;
+      inset: 8px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px 14px 8px;
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
+      overflow: hidden;
+      animation: slide 0.5s cubic-bezier(.3, 1.4, .5, 1) both;
+    }
+    @keyframes slide { from { transform: translateX(115%); } }
+    .face { width: 78px; height: 78px; flex: none; border-radius: 12px; background: var(--field); }
+    .text { flex: 1; min-width: 0; }
+    .head { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; }
+    .head span { font-variant-numeric: tabular-nums; }
+    .sub { font-size: 13px; color: #4f6158; margin-top: 3px; }
+    .btns { display: flex; gap: 16px; margin-top: 9px; align-items: center; }
+    .btns button { font-size: 13px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(23, 48, 42, 0.3); }
+    .btns button:hover { text-decoration-color: currentColor; }
+    .btns button.primary { padding: 4px 12px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; }
+    .bar { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--persimmon); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="face act-eyes" id="face"></div>
+    <div class="text">
+      <div class="head"><span id="title"></span> in <span id="secs"></span>s</div>
+      <div class="sub" id="sub">Finish your sentence. I'll wait. Briefly.</div>
+      <div class="btns">
+        <button class="primary" id="now">Start now</button>
+        <button id="snooze" hidden>Snooze 5 min</button>
+        <button id="skip" hidden>Skip</button>
+      </div>
+    </div>
+    <div class="bar" id="bar"></div>
+  </div>
+  <script src="mascot.js"></script>
+  <script src="warn.js"></script>
+</body>
+</html>

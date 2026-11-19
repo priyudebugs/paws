@@ -1,0 +1,30 @@
+@font-face { font-family: 'Source Serif 4'; font-weight: 200 900; font-style: normal; src: url(fonts/source-serif-4-latin-opsz-normal.woff2) format('woff2-variations'); }
+@font-face { font-family: 'Schibsted Grotesk'; font-weight: 400; src: url(fonts/schibsted-grotesk-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Schibsted Grotesk'; font-weight: 500; src: url(fonts/schibsted-grotesk-latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Schibsted Grotesk'; font-weight: 600; src: url(fonts/schibsted-grotesk-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Schibsted Grotesk'; font-weight: 700; src: url(fonts/schibsted-grotesk-latin-700-normal.woff2) format('woff2'); }
+
+:root {
+  --paper: #f1f4f2;
+  --ink: #17302a;
+  --persimmon: #d9572b;
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: 'Schibsted Grotesk', 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: var(--sans);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+button:focus-visible, input:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+.grain { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.16; mix-blend-mode: multiply; z-index: 50; }
+
+/* Wordmark: paw print + "Paws" */
+.wordmark { display: inline-flex; align-items: center; gap: 0.32em; font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; }
+.wordmark svg { width: 0.95em; height: 0.95em; fill: var(--persimmon); transform: rotate(-12deg) translateY(-0.04em); }

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <title>Paws</title>
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="mascot.css" />
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="band" id="today">
+      <div class="band-dog" id="mascot"></div>
+      <div class="band-text">
+        <h1 class="wordmark" id="brand">Paws</h1>
+        <p class="tagline" id="tagline">Paws for a moment. Your back will thank you.</p>
+      </div>
+      <div class="band-status">
+        <span class="status-pill"><span class="pulse" id="pulse"></span><span id="status"></span></span>
+        <div class="band-actions">
+          <button class="link" id="pauseBtn"></button>
+          <button class="link" id="mastAway">Step away</button>
+          <button class="link" id="quitBtn">Quit Paws</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="jump" id="jump">
+      <a href="#today" data-target="today">Today</a>
+      <a href="#you" data-target="you">You &amp; your dog</a>
+      <a href="#reminders" data-target="reminders">Reminders</a>
+      <a href="#away" data-target="away">Away screen</a>
+      <a href="#burnout" data-target="burnout">Burnout guard</a>
+      <a href="#prefs" data-target="prefs">Preferences</a>
+    </nav>
+
+    <aside class="note" id="welcome" hidden>
+      I live in your system tray, behind the <kbd>^</kbd> next to the clock. Close this window and I'll keep watching.
+      Right-click me there to pause or to take a break right now.
+    </aside>
+
+    <section class="panel">
+      <div class="panel-head">
+        <span class="chip" style="--c: #e07a5c" data-icon="today"></span>
+        <h2>Today</h2><p id="dateLine"></p>
+      </div>
+      <div class="figures">
+        <div class="fig"><span class="num" id="taken">0</span><span class="cap">breaks today</span></div>
+        <div class="fig"><span class="num" id="skipped">0</span><span class="cap">skipped</span></div>
+        <div class="fig"><span class="num" id="streak">0</span><span class="cap">day streak</span></div>
+        <div class="fig"><span class="num word" id="mood">None yet</span><span class="cap">last check-in</span></div>
+        <div class="fig week">
+          <div class="chart" id="chart" role="img"></div>
+          <div class="days" id="days"></div>
+          <table class="sr-only" id="weekTable"></table>
+          <div class="tip" id="tip" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="you">
+      <div class="panel-head">
+        <span class="chip" style="--c: #f1a985" data-icon="you"></span>
+        <h2>You &amp; your dog</h2><p>So Paws knows who to nag, and who's doing the nagging.</p>
+      </div>
+      <div class="you-grid">
+        <label class="text-field"><span>Your name</span><input type="text" id="userName" maxlength="24" placeholder="Your first name" autocomplete="off" spellcheck="false" /></label>
+        <label class="text-field"><span>Your dog's name</span><input type="text" id="dogName" maxlength="24" placeholder="Paws" autocomplete="off" spellcheck="false" /></label>
+        <div class="you-preview" aria-live="polite"><span id="youBubble"></span><span class="you-sig" id="youSig"></span></div>
+      </div>
+      <div class="wardrobe">
+        <div class="wardrobe-head"><b id="wardrobeTitle">Wardrobe</b><span id="wardrobeNote"></span></div>
+        <div class="gear-list" id="gearList"></div>
+      </div>
+      <div class="list">
+        <div class="item">
+          <div class="item-text"><b id="outfitLabel">Let your dog dress up</b><span>Unlocked items show up on every screen. Keep your streak going to earn the next one.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="outfit" aria-label="Show accessories" /><span></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="reminders">
+      <div class="panel-head">
+        <span class="chip" style="--c: #b9cedc" data-icon="reminders"></span>
+        <h2>Reminders</h2><p>How often each one shows up, and for how long.</p>
+      </div>
+      <div class="rem-labels" aria-hidden="true"><span></span><span>Reminder</span><span>Every</span><span>Lasts</span><span></span><span>On</span></div>
+      <div class="list" id="remList"></div>
+    </section>
+
+    <section class="panel" id="away">
+      <div class="panel-head">
+        <span class="chip" style="--c: #a6c389" data-icon="away"></span>
+        <h2>Away screen</h2><p>What people see while you're gone.</p>
+      </div>
+      <div class="away-edit">
+        <div class="away-preview" id="awayPreview" aria-hidden="true">
+          <span class="ap-mark" id="apMark">Paws</span>
+          <span class="ap-lock" id="apLock">Locked</span>
+          <span class="ap-title" id="apTitle"></span>
+          <span class="ap-sub" id="apSub"></span>
+          <span class="ap-ground"></span>
+        </div>
+        <div class="away-fields">
+          <label class="text-field"><span>Headline</span><input type="text" id="awayTitle" maxlength="60" /></label>
+          <label class="text-field"><span>Second line</span><input type="text" id="awaySubtitle" maxlength="110" /></label>
+          <div class="field-block">
+            <span class="field-label">Quick messages</span>
+            <div class="presets" id="presets"></div>
+          </div>
+          <div class="field-block">
+            <span class="field-label">Background <em id="colorName"></em></span>
+            <div class="swatches" id="swatches" role="radiogroup" aria-label="Away screen colour"></div>
+          </div>
+          <div class="away-actions"><button class="btn" id="awayShow">Show it now</button><span id="awayHint"></span></div>
+        </div>
+      </div>
+      <div class="list">
+        <div class="item">
+          <div class="item-text"><b>Lock my PC when someone touches it</b><span>The screen stays up for coworkers. The moment the mouse or keyboard is touched, Windows locks and asks for your password.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="awayLock" aria-label="Lock the PC from the away screen" /><span></span></label>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>Keyboard shortcut</b><span>Press <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>B</kbd> anywhere to put the away screen up.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="awayShortcut" aria-label="Away screen keyboard shortcut" /><span></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="burnout">
+      <div class="panel-head">
+        <span class="chip" style="--c: #e8c25a" data-icon="burnout"></span>
+        <h2>Burnout guard</h2><p>For the days that get away from you.</p>
+      </div>
+      <div class="list">
+        <div class="item">
+          <div class="item-text"><b>Marathon check</b><span>Ask how I'm doing after <em id="marathonVal"></em> without a real break.</span></div>
+          <span class="ctrl"><input type="range" id="marathonHours" min="1" max="6" step="0.5" aria-label="Hours before a marathon check" /></span>
+          <label class="switch"><input type="checkbox" id="marathonOn" aria-label="Marathon check" /><span></span></label>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>End-of-day nudge</b><span>Tell me to wrap up at this time<span id="weekdayNote"></span>.</span></div>
+          <span class="ctrl"><input type="time" id="winddownTime" aria-label="End of day time" /></span>
+          <label class="switch"><input type="checkbox" id="winddownOn" aria-label="End-of-day nudge" /><span></span></label>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>Weekdays only</b><span>No end-of-day nudge on weekends.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="weekdaysOnly" aria-label="Weekdays only" /><span></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="prefs">
+      <div class="panel-head">
+        <span class="chip" style="--c: #c7beda" data-icon="prefs"></span>
+        <h2>Preferences</h2><p>How pushy should I be?</p>
+      </div>
+      <div class="list">
+        <div class="item">
+          <div class="item-text"><b>Strict mode</b><span>No skip or snooze. For people with zero self-control, which is all of us.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="strict" aria-label="Strict mode" /><span></span></label>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>Hold breaks during calls</b><span>If your microphone is in use (Teams, Zoom, Meet), I'll wait until you hang up.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="pauseOnCalls" aria-label="Hold breaks during calls" /><span></span></label>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>Heads-up</b><span>Warn me <em id="warnVal"></em> before a break.</span></div>
+          <span class="ctrl"><input type="range" id="warnSeconds" min="0" max="30" step="5" aria-label="Heads-up seconds" /></span>
+          <span class="switch-gap"></span>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>Sounds</b><span>Soft chimes. Your coworkers won't notice. Probably.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="sound" aria-label="Sounds" /><span></span></label>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>Start with Windows</b><span>Launch quietly in the tray when you sign in.</span></div>
+          <span class="ctrl"></span>
+          <label class="switch"><input type="checkbox" id="launchAtLogin" aria-label="Start with Windows" /><span></span></label>
+        </div>
+        <div class="item">
+          <div class="item-text"><b>Friday report card</b><span id="reportDesc">Every Friday afternoon, your dog grades your week.</span></div>
+          <span class="ctrl"><button class="link" id="reportNow">Show this week's</button></span>
+          <label class="switch"><input type="checkbox" id="report" aria-label="Friday report card" /><span></span></label>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot"><span id="version"></span><button class="link" id="introReplay">Replay intro</button><span class="saved" id="saved">Saved</span></footer>
+  </div>
+
+  <div class="intro" id="intro" hidden>
+    <div class="intro-card" id="introCard" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+      <button class="link intro-skip" id="introSkip">Skip intro</button>
+      <div class="intro-dog" id="introDog"></div>
+      <h2 id="introTitle"></h2>
+      <p id="introText"></p>
+      <div class="intro-extra" id="introExtra"></div>
+      <div class="intro-foot">
+        <div class="intro-dots" id="introDots" aria-hidden="true"></div>
+        <div class="intro-btns"><button class="link" id="introBack">Back</button><button class="btn" id="introNext">Next</button></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="mascot.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

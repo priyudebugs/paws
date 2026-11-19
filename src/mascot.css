@@ -1,0 +1,212 @@
+.mascot {
+  --m-body: #f6e7d0;
+  --m-tan: #cf9561;
+  --m-muzzle: #fff8ec;
+  --m-ink: #17302a;
+  --m-cheek: #d9572b;
+  --m-collar: #2e6a4f;
+  --m-tongue: #e5776c;
+  color: var(--m-ink);
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.mascot * { transform-box: fill-box; }
+
+.m-shadow { fill: var(--m-ink); opacity: 0.14; transform-origin: 50% 50%; animation: m-shadow 3.2s ease-in-out infinite; }
+.m-body { transform-origin: 50% 100%; animation: m-bob 3.2s ease-in-out infinite; }
+.m-head { transform-origin: 50% 90%; transition: transform 1.2s ease; }
+
+.m-blob, .m-torso { fill: var(--m-body); stroke: var(--m-ink); stroke-width: 4.5; stroke-linejoin: round; }
+.m-patch { fill: var(--m-tan); opacity: 0.75; }
+.m-ear { fill: var(--m-tan); stroke: var(--m-ink); stroke-width: 4.5; stroke-linejoin: round; animation: m-ear 4.6s ease-in-out infinite; }
+.m-ear.l { transform-origin: 70% 0%; }
+.m-ear.r { transform-origin: 30% 0%; animation-delay: -2.3s; }
+.m-muzzle { fill: var(--m-muzzle); }
+.m-chest { fill: var(--m-muzzle); }
+.m-cheek { fill: var(--m-cheek); opacity: 0.3; }
+.m-nose { fill: var(--m-ink); }
+.m-collar { fill: none; stroke: var(--m-collar); stroke-width: 8; stroke-linecap: round; }
+.m-tag { fill: var(--persimmon, #d9572b); stroke: var(--m-ink); stroke-width: 2.5; }
+
+.m-tail { transform-origin: 0% 100%; animation: m-wag 0.9s ease-in-out infinite alternate; }
+.tail-o { fill: none; stroke: var(--m-ink); stroke-width: 13; stroke-linecap: round; }
+.tail-i { fill: none; stroke: var(--m-tan); stroke-width: 5; stroke-linecap: round; }
+
+.m-arm .leg-o { fill: none; stroke: var(--m-ink); stroke-width: 17; stroke-linecap: round; }
+.m-arm .leg-i { fill: none; stroke: var(--m-body); stroke-width: 9; stroke-linecap: round; }
+.m-arm.l { transform-origin: 50% 0%; }
+.m-arm.r { transform-origin: 50% 0%; }
+.m-foot ellipse { fill: var(--m-body); stroke: var(--m-ink); stroke-width: 4.5; }
+.m-foot path { fill: none; stroke: var(--m-ink); stroke-width: 2.2; stroke-linecap: round; }
+
+.m-eye-white { fill: #fffdf8; stroke: var(--m-ink); stroke-width: 3.5; }
+.m-pupil { fill: var(--m-ink); transform: translate(var(--px, 0), var(--py, 0)); transition: transform 0.12s ease-out; }
+.m-glint { fill: #fffdf8; }
+.m-eye { transform-origin: 50% 50%; animation: m-blink 4.6s infinite; }
+.m-lid { fill: var(--m-body); stroke: var(--m-ink); stroke-width: 3.5; opacity: 0; }
+.m-eye:last-child .m-lid { fill: var(--m-tan); }
+.m-happy-eyes path, .m-mouth { fill: none; stroke: var(--m-ink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.m-happy-eyes { opacity: 0; }
+.m-grin-mouth { fill: var(--m-ink); }
+.m-tongue { fill: var(--m-tongue); stroke: var(--m-ink); stroke-width: 2.5; }
+.m-o { fill: var(--m-ink); }
+.m-grin, .m-o, .m-wavy { opacity: 0; }
+.m-bowl, .m-lap, .m-sweat, .m-zzz, .m-sparkle { opacity: 0; transition: opacity 0.3s; }
+.m-bowl .bowl { fill: var(--m-cheek); stroke: var(--m-ink); stroke-width: 4; stroke-linejoin: round; }
+.m-bowl .bowl-water { fill: #9fd0e0; stroke: var(--m-ink); stroke-width: 3; }
+.m-bowl .bowl-bone { fill: #fffdf8; }
+.m-lap { fill: var(--m-tongue); stroke: var(--m-ink); stroke-width: 2.5; stroke-linejoin: round; transform-origin: 50% 0%; }
+.m-sweat { fill: #fffdf8; stroke: var(--m-ink); stroke-width: 3; }
+.m-zzz { fill: currentColor; font: 600 26px 'Source Serif 4', Georgia, serif; }
+.m-sparkle { fill: #fffdf8; stroke: var(--m-ink); stroke-width: 2.5; stroke-linejoin: round; }
+
+/* accessories earned from streaks */
+.m-gear { display: none; }
+.gear-bandana .m-gear-bandana, .gear-shades .m-gear-shades, .gear-hat .m-gear-hat,
+.gear-cape .m-gear-cape, .gear-skateboard .m-gear-skateboard, .gear-medal .m-gear-medal, .gear-crown .m-gear-crown { display: inline; }
+.gear-crown .m-gear-hat { display: none; }
+.m-gear-cape path { fill: #2f7f78; stroke: var(--m-ink); stroke-width: 4; stroke-linejoin: round; }
+.m-gear-cape .cape-clasp { fill: none; stroke: #e8c25a; stroke-width: 6; stroke-linecap: round; }
+.m-gear-cape { transform-origin: 50% 0%; animation: m-cape 2.6s ease-in-out infinite; }
+@keyframes m-cape { 0%, 100% { transform: skewX(0deg); } 50% { transform: skewX(-4deg) scaleY(1.02); } }
+.m-gear-skateboard rect { fill: #e8c25a; stroke: var(--m-ink); stroke-width: 4; }
+.m-gear-skateboard .deck-stripe { fill: none; stroke: var(--m-cheek); stroke-width: 4; stroke-linecap: round; }
+.m-gear-skateboard circle { fill: var(--m-ink); }
+.gear-skateboard .m-shadow { transform: translateY(14px); }
+.m-gear-medal .ribbon-o { fill: none; stroke: var(--m-ink); stroke-width: 11; stroke-linejoin: round; }
+.m-gear-medal .ribbon { fill: none; stroke: var(--m-cheek); stroke-width: 6; stroke-linejoin: round; }
+.m-gear-medal circle { fill: #e8c25a; stroke: var(--m-ink); stroke-width: 4; }
+.m-gear-medal .star { fill: #fffdf8; stroke: var(--m-ink); stroke-width: 1.5; stroke-linejoin: round; }
+.m-gear-crown path { fill: #e8c25a; stroke: var(--m-ink); stroke-width: 4; stroke-linejoin: round; }
+.m-gear-crown .jewel { fill: var(--m-cheek); stroke: var(--m-ink); stroke-width: 2.5; }
+.m-gear-crown .gem { fill: #93c4bc; stroke: var(--m-ink); stroke-width: 2; }
+.m-gear-bandana .scarf { fill: var(--m-cheek); stroke: var(--m-ink); stroke-width: 4; stroke-linejoin: round; }
+.m-gear-bandana circle { fill: #fffdf8; }
+.m-gear-shades rect { fill: var(--m-ink); stroke: var(--m-ink); stroke-width: 3; }
+.m-gear-shades .shade-arm { fill: none; stroke: var(--m-ink); stroke-width: 4; stroke-linecap: round; }
+.m-gear-shades .shine { fill: none; stroke: #fffdf8; stroke-width: 2.5; stroke-linecap: round; opacity: 0.55; }
+.m-gear-hat .hat { fill: #e8c25a; stroke: var(--m-ink); stroke-width: 4; stroke-linejoin: round; }
+.m-gear-hat .hat-stripe { fill: none; stroke: var(--m-cheek); stroke-width: 5; stroke-linecap: round; }
+.m-gear-hat .pom { fill: var(--m-cheek); stroke: var(--m-ink); stroke-width: 3.5; }
+.gear-shades .m-happy-eyes { opacity: 0 !important; }
+
+@keyframes m-bob { 0%, 100% { transform: translateY(0) scale(1, 1); } 50% { transform: translateY(-5px) scale(0.99, 1.01); } }
+@keyframes m-shadow { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.9); } }
+@keyframes m-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.08); } }
+@keyframes m-wag { from { transform: rotate(-16deg); } to { transform: rotate(14deg); } }
+@keyframes m-ear { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(4deg); } }
+
+/* look far away */
+.act-eyes .m-pupil { animation: m-look 5s ease-in-out infinite; transition: none; }
+.act-eyes .m-smile { opacity: 0; }
+.act-eyes .m-o { opacity: 1; }
+.act-eyes .m-head { animation: m-scan 5s ease-in-out infinite; }
+@keyframes m-look { 0%, 100% { transform: translate(-5px, -3px); } 40%, 50% { transform: translate(5px, -3px); } 75% { transform: translate(0, -5px); } }
+@keyframes m-scan { 0%, 100% { transform: rotate(-4deg); } 40%, 50% { transform: rotate(4deg); } 75% { transform: rotate(0); } }
+
+/* posture: slouch, then sit up proud */
+.act-posture .m-body { animation: m-straighten 3s ease-in-out infinite; }
+.act-posture .m-sparkle { animation: m-twinkle 3s ease-in-out infinite; }
+@keyframes m-straighten {
+  0%, 15% { transform: rotate(8deg) scale(1.04, 0.88) translateY(8px); }
+  45%, 85% { transform: rotate(0) scale(0.97, 1.08); }
+  100% { transform: rotate(8deg) scale(1.04, 0.88) translateY(8px); }
+}
+@keyframes m-twinkle { 0%, 30% { opacity: 0; } 50%, 80% { opacity: 1; } 100% { opacity: 0; } }
+
+/* water: a bowl at the paws, head dips down, tongue laps */
+.act-water .m-bowl { opacity: 1; }
+.act-water .m-head { animation: m-dip 2.4s ease-in-out infinite; }
+.act-water .m-smile { opacity: 0; }
+.act-water .m-lap { opacity: 1; animation: m-lap 0.32s ease-in-out infinite alternate; }
+.act-water .m-pupil { transform: translate(0, 4px); }
+@keyframes m-dip { 0%, 100% { transform: translateY(0) rotate(0); } 30%, 75% { transform: translateY(4px) rotate(4deg) scaleY(0.97); } }
+@keyframes m-lap { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
+
+/* stretch steps */
+.act-stretch .m-arm.l { animation: m-reach-l 2.4s ease-in-out infinite; }
+.act-stretch .m-arm.r { animation: m-reach-r 2.4s ease-in-out infinite; }
+.act-stretch .m-body { animation: m-tall 2.4s ease-in-out infinite; }
+/* front legs reach out sideways from the shoulder, so they stay attached to the body */
+@keyframes m-reach-l { 0%, 100% { transform: rotate(0); } 40%, 70% { transform: rotate(30deg); } }
+@keyframes m-reach-r { 0%, 100% { transform: rotate(0); } 40%, 70% { transform: rotate(-30deg); } }
+@keyframes m-tall { 0%, 100% { transform: scale(1, 1); } 40%, 70% { transform: scale(0.96, 1.08); } }
+.act-stretch .m-head { animation: m-yawn-head 2.4s ease-in-out infinite; }
+.act-stretch .m-smile { animation: m-show-out 2.4s ease-in-out infinite; }
+.act-stretch .m-o { animation: m-show-in 2.4s ease-in-out infinite; }
+.act-stretch .m-eye { animation: m-squint 2.4s ease-in-out infinite; }
+@keyframes m-yawn-head { 0%, 100% { transform: rotate(0); } 40%, 70% { transform: translateY(-3px) rotate(-5deg); } }
+@keyframes m-show-in { 0%, 35%, 75%, 100% { opacity: 0; } 45%, 65% { opacity: 1; } }
+@keyframes m-show-out { 0%, 35%, 75%, 100% { opacity: 1; } 45%, 65% { opacity: 0; } }
+@keyframes m-squint { 0%, 35%, 75%, 100% { transform: scaleY(1); } 45%, 65% { transform: scaleY(0.45); } }
+.act-shoulders .m-body { animation: m-roll 1.8s ease-in-out infinite; }
+@keyframes m-roll {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-8px) rotate(-3deg); }
+  50% { transform: translateY(-3px) rotate(0); }
+  75% { transform: translateY(3px) rotate(3deg); }
+}
+.act-tilt-right .m-head { transform: rotate(16deg); }
+.act-tilt-left .m-head { transform: rotate(-16deg); }
+
+/* breathing: scale is driven by the phase class */
+.act-breathe .m-body { animation: none; transition: transform 4s ease-in-out; transform-origin: 50% 80%; }
+.act-breathe.phase-in .m-body, .act-breathe.phase-hold-in .m-body { transform: scale(1.12); }
+.act-breathe.phase-out .m-body, .act-breathe.phase-hold-out .m-body { transform: scale(0.9); }
+.act-breathe.phase-hold-in .m-smile, .act-breathe.phase-in .m-smile { opacity: 0; }
+.act-breathe.phase-hold-in .m-o, .act-breathe.phase-in .m-o { opacity: 1; }
+.act-breathe .m-tail { animation-duration: 2s; }
+
+/* walk: little paws, march in place */
+.act-walk .m-walker { animation: m-stroll 6s ease-in-out infinite; transform-origin: 50% 100%; }
+.act-walk .m-body { animation: m-step-bob 0.5s ease-in-out infinite; }
+.act-walk .m-foot.l { animation: m-step 1s ease-in-out infinite; }
+.act-walk .m-foot.r { animation: m-step 1s ease-in-out infinite 0.5s; }
+.act-walk .m-arm.l { animation: m-swing 1s ease-in-out infinite; }
+.act-walk .m-arm.r { animation: m-swing 1s ease-in-out infinite reverse; }
+.act-walk .m-tail { animation-duration: 0.35s; }
+@keyframes m-stroll { 0%, 100% { transform: translateX(-40px); } 50% { transform: translateX(40px); } }
+@keyframes m-step-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes m-step { 0%, 100% { transform: translateY(0); } 25% { transform: translateY(-10px); } 50% { transform: translateY(0); } }
+@keyframes m-swing { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(14deg); } }
+
+/* burnout: sweaty, ears down, tail still */
+.act-burnout .m-sweat { opacity: 1; animation: m-drip 1.6s ease-in infinite; }
+.act-burnout .m-smile { opacity: 0; }
+.act-burnout .m-wavy { opacity: 1; }
+.act-burnout .m-tail { animation: none; transform: rotate(40deg); }
+.act-burnout .m-ear { animation: none; transform: rotate(8deg); }
+.act-burnout .m-body { animation: m-wobble 2.2s ease-in-out infinite; }
+@keyframes m-drip { 0% { transform: translateY(0); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(40px); opacity: 0; } }
+@keyframes m-wobble { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg) scale(1.02, 0.97); } }
+
+/* end of day: sleepy lids and floating Zs */
+.act-sleepy .m-lid { opacity: 1; }
+.act-sleepy .m-eye { animation: none; }
+.act-sleepy .m-zzz { opacity: 1; }
+.act-sleepy .m-zzz text { animation: m-float 3s ease-in-out infinite; }
+.act-sleepy .m-zzz text:nth-child(2) { animation-delay: 0.6s; }
+.act-sleepy .m-zzz text:nth-child(3) { animation-delay: 1.2s; }
+.act-sleepy .m-body { animation-duration: 5s; }
+.act-sleepy .m-tail { animation-duration: 3s; }
+@keyframes m-float { 0% { transform: translateY(10px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateY(-14px); opacity: 0; } }
+
+/* happy beats every act: grin, tongue out, fast wag */
+.mascot.happy .m-eye, .mascot.happy .m-mouth:not(.m-grin) { opacity: 0; }
+.mascot.happy .m-happy-eyes, .mascot.happy .m-grin { opacity: 1; }
+.mascot.happy .m-sweat, .mascot.happy .m-bowl, .mascot.happy .m-lap, .mascot.happy .m-zzz { opacity: 0; }
+.mascot.happy .m-tail { animation: m-wag 0.22s ease-in-out infinite alternate; transform: none; }
+.mascot.celebrate .m-walker { animation: m-jump 0.9s cubic-bezier(.3, .7, .4, 1) infinite; transform-origin: 50% 100%; }
+.mascot.celebrate .m-arm.l { animation: m-reach-l 0.9s ease-in-out infinite; }
+.mascot.celebrate .m-arm.r { animation: m-reach-r 0.9s ease-in-out infinite; }
+.mascot.celebrate .m-sparkle { opacity: 1; }
+@keyframes m-jump {
+  0%, 100% { transform: translateY(0) scale(1.05, 0.93); }
+  40% { transform: translateY(-42px) scale(0.96, 1.06) rotate(-5deg); }
+  60% { transform: translateY(-36px) rotate(5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot *, .mascot { animation: none !important; transition: none !important; }
+}
